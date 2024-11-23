@@ -17,7 +17,6 @@ def train_model(model, train_loader, test_loader, num_epochs=30):
     :param train_loader: 訓練集的 DataLoader
     :param test_loader: 測試集的 DataLoader
     :param num_epochs: 訓練的總 epoch 數
-    :param save_path: 儲存模型參數的路徑
     """
     model = model.to(DEVICE)
     criterion = nn.CrossEntropyLoss()
