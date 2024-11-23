@@ -23,6 +23,7 @@ CNN_STOCK/
 │   └── data_utils.py    # 數據處理工具
 │
 ├── requirements.txt     # 所需 Python 模組
+│
 ├── README.md            # 專案說明文件
 ```
 
