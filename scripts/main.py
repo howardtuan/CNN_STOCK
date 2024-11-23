@@ -19,8 +19,8 @@ from scripts.evaluate import evaluate_model
 
 
 def main():
-    img_dir = "path/to/images"
-    labels_file = "path/to/labels.xlsx"
+    img_dir = 'C:\\Users\\680-9000\\Desktop\\finance\\datav3\\Image1'
+    labels_file = 'C:\\Users\\680-9000\\Desktop\\finance\\datav3\\X_5_5.xlsx'
     dataset = CustomImageDataset(img_dir=img_dir, labels_file=labels_file)
 
     train_size = int(0.8 * len(dataset))
@@ -28,10 +28,13 @@ def main():
     train_dataset, test_dataset = random_split(dataset, [train_size, test_size])
     train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
-
+    print("初始化模型...")
     model = CNN5d()
+    print("開始訓練...")
     train_model(model, train_loader, test_loader)
-    evaluate_model(model, test_loader)
+    print("評估模型...")
+    accuracy, conf_matrix = evaluate_model(model, test_loader)
+    print(f"\nFinal Test Accuracy: {accuracy:.4f}")
 
 if __name__ == "__main__":
     main()

@@ -33,4 +33,4 @@ def evaluate_model(model, test_loader):
     
     print("\nClassification Report:")
     print(classification_report(all_labels, all_preds, target_names=['Class 0', 'Class 1']))
-    return accuracy
+    return accuracy,conf_matrix
