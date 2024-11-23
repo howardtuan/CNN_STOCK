@@ -33,15 +33,23 @@ CNN_STOCK/
 - CUDA：若使用 GPU 訓練，請確保 CUDA 已正確安裝
 
 ## **安裝與啟用**
-
-### **步驟 1：安裝依賴**
+### **步驟 1：複製專案到本地**
+   ```bash
+   git clone https://github.com/howardtuan/orangeapple.git 
+   ```
+### **步驟 2：建立及啟用虛擬環境（可選但建議使用）**
+```bash
+python -m venv venv
+source venv/bin/activate   # Windows 系統執行：venv\Scripts\activate
+```
+### **步驟 3：安裝依賴**
 首先，安裝專案所需的 Python 模組：
 ```bash
 pip install -r requirements.txt
 ```
-### **步驟 2：準備數據**
+### **步驟 4：準備數據**
 將您的數據文件放入 data/ 文件夾，並更新路徑參數（例如 main.py 中的 img_dir 和 labels_file）。
-### **步驟 3：啟用專案**
+### **步驟 5：啟用專案**
 執行以下命令以運行主程式：
 ```bash
 python scripts/main.py
