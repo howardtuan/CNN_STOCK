@@ -9,3 +9,4 @@ Pillow
 tqdm
 joblib
 pyyaml
+matplotlib
