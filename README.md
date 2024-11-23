@@ -3,7 +3,7 @@
 
 ## 專案架構
 ```bash
-project/
+CNN_STOCK/
 │
 ├── data/                # 資料集(檔案不在github)
 │   └── dataset(IMG&csv)    
