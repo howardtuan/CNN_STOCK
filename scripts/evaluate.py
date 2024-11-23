@@ -24,8 +24,13 @@ def evaluate_model(model, test_loader):
     accuracy = accuracy_score(all_labels, all_preds)
     conf_matrix = confusion_matrix(all_labels, all_preds)
 
-    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=['Class 0', 'Class 1'], yticklabels=['Class 0', 'Class 1'])
+    plt.ylabel('Actual')
+    plt.xlabel('Predicted')
+    plt.title('Confusion Matrix')
     plt.show()
-
-    print(classification_report(all_labels, all_preds))
+    
+    print("\nClassification Report:")
+    print(classification_report(all_labels, all_preds, target_names=['Class 0', 'Class 1']))
     return accuracy
