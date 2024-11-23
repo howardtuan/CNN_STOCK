@@ -13,7 +13,7 @@ project/
 │
 ├── models/              # 模型定義
 │   └── cnn_model.py     # CNN 模型代碼
-
+│ 
 ├── scripts/             # 腳本文件夾
 │   ├── train.py         # 訓練腳本
 │   ├── evaluate.py      # 評估腳本
