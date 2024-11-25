@@ -6,7 +6,6 @@
 CNN_STOCK/
 │
 ├── models/                        # 模型定義
-│   ├── __init__.py
 │   └── cnn_model.py               # CNN 模型程式碼
 │
 ├── notebooks/                     # Jupyter Notebook
@@ -21,7 +20,6 @@ CNN_STOCK/
 │   └── train.py                   # 訓練腳本
 │
 ├── utilsS/                         # 工具函式
-│   ├── __init__.py
 │   ├── config.py                  # 配置檔案
 │   ├── data_utils.py              # 數據處理工具
 │   ├── early_stopping.py          # 提早停止的功能
