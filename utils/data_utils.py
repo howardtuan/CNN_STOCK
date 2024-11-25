@@ -2,21 +2,19 @@
 # 定義自定義數據集類，負責讀取和處理圖片數據
 
 import os
+from PIL import Image
 import pandas as pd
 from torch.utils.data import Dataset
-from PIL import Image
 from torchvision import transforms
+from utilsS.config import Config
 
-IMG_HEIGHT = {5: 32}
-IMG_WIDTH = {5: 15}
-
+# DATA PREPARE
 class CustomImageDataset(Dataset):
     def __init__(self, img_dir, labels_file, transform=None):
-        # 初始化數據集
         self.img_dir = img_dir
-        self.labels = pd.read_excel(labels_file)
+        self.labels = pd.read_csv(labels_file,sep="\t")
         self.transform = transform or transforms.Compose([
-            transforms.Resize((IMG_HEIGHT[5], IMG_WIDTH[5])),
+            transforms.Resize((Config.IMG_HEIGHT[5], Config.IMG_WIDTH[5])),
             transforms.ToTensor(),
         ])
 
@@ -24,28 +22,30 @@ class CustomImageDataset(Dataset):
         return len(self.labels)
 
     def __getitem__(self, idx):
+        img_path = self._get_valid_image_path(idx)
+        image = self._load_and_transform_image(img_path)
+        label = int(self.labels.iloc[idx, 1])
+        return image, label
+
+    def _get_valid_image_path(self, idx):
         img_path = os.path.join(self.img_dir, self.labels.iloc[idx, 0])
-        
         if not os.path.exists(img_path):
             for ext in ['.png', '.jpg', '.jpeg', '.bmp', '.tiff']:
                 test_path = img_path + ext
                 if os.path.exists(test_path):
-                    img_path = test_path
-                    break
-        
+                    return test_path
+        return img_path
+
+    def _load_and_transform_image(self, img_path):
         try:
             image = Image.open(img_path).convert('1')
         except Exception as e:
             print(f"Error loading image {img_path}: {e}")
-            image = Image.new('1', (IMG_WIDTH, IMG_HEIGHT), 0)
-        
-        if self.transform:
-            try:
-                image = self.transform(image)
-            except Exception as e:
-                print(f"Error transforming image {img_path}: {e}")
-                blank = Image.new('1', (IMG_WIDTH, IMG_HEIGHT), 0)
-                image = self.transform(blank)
-        
-        label = int(self.labels.iloc[idx, 1])
-        return image, label
+            image = Image.new('1', (Config.IMG_WIDTH[5], Config.IMG_HEIGHT[5]), 0)
+
+        try:
+            return self.transform(image)
+        except Exception as e:
+            print(f"Error transforming image {img_path}: {e}")
+            blank = Image.new('1', (Config.IMG_WIDTH[5], Config.IMG_HEIGHT[5]), 0)
+            return self.transform(blank)
