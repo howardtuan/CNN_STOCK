@@ -5,26 +5,35 @@
 ```bash
 CNN_STOCK/
 │
-├── data/                # 資料集(檔案不在github)
-│   └── dataset(IMG&csv)    
-│  
-├── notebooks/           # notebook版本
-│   └── 1120.ipynb       
+├── models/                        # 模型定義
+│   ├── __init__.py
+│   └── cnn_model.py               # CNN 模型程式碼
 │
-├── models/              # 模型定義
-│   └── cnn_model.py     # CNN 模型代碼
-│ 
-├── scripts/             # 腳本文件夾
-│   ├── train.py         # 訓練腳本
-│   ├── evaluate.py      # 評估腳本
-│   └── main.py          # 主程序入口
+├── notebooks/                     # Jupyter Notebook
+│   ├── 1120.ipynb                 # 初始版本的 Notebook
+│   ├── 1121_good.ipynb            # 已修改的 Notebook
+│   └── predict.ipynb              # 預測 Notebook
 │
-├── utils/               # 工具函數
-│   └── data_utils.py    # 數據處理工具
+├── scripts/                       # 腳本程式
+│   ├── evaluate.py                # 評估腳本
+│   ├── main.py                    # 主程式
+│   ├── predict.py                 # 預測腳本
+│   └── train.py                   # 訓練腳本
 │
-├── requirements.txt     # 所需 Python 模組
+├── utilsS/                         # 工具函式
+│   ├── __init__.py
+│   ├── config.py                  # 配置檔案
+│   ├── data_utils.py              # 數據處理工具
+│   ├── early_stopping.py          # 提早停止的功能
+│   ├── model_loader.py            # 模型載入
+│   ├── model_save.py              # 模型儲存
+│   ├── setup_gpu.py               # GPU 設定
+│   ├── train_epoch.py             # 訓練單一 epoch
+│   ├── training_log.py            # 訓練日誌記錄
+│   └── validate_epoch.py          # 驗證單一 epoch
 │
-├── README.md            # 專案說明文件
+├── README.md                      # 專案說明文件
+└── requirements.txt               # Python 依賴清單
 ```
 
 ## **環境需求**
