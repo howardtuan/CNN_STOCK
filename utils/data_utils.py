@@ -24,13 +24,28 @@ class CustomImageDataset(Dataset):
         return len(self.labels)
 
     def __getitem__(self, idx):
-        # 根據索引讀取圖片和標籤
         img_path = os.path.join(self.img_dir, self.labels.iloc[idx, 0])
+        
+        if not os.path.exists(img_path):
+            for ext in ['.png', '.jpg', '.jpeg', '.bmp', '.tiff']:
+                test_path = img_path + ext
+                if os.path.exists(test_path):
+                    img_path = test_path
+                    break
+        
         try:
             image = Image.open(img_path).convert('1')
         except Exception as e:
             print(f"Error loading image {img_path}: {e}")
-            image = Image.new('1', (IMG_WIDTH[5], IMG_HEIGHT[5]), 0)
-        image = self.transform(image)
+            image = Image.new('1', (IMG_WIDTH, IMG_HEIGHT), 0)
+        
+        if self.transform:
+            try:
+                image = self.transform(image)
+            except Exception as e:
+                print(f"Error transforming image {img_path}: {e}")
+                blank = Image.new('1', (IMG_WIDTH, IMG_HEIGHT), 0)
+                image = self.transform(blank)
+        
         label = int(self.labels.iloc[idx, 1])
         return image, label
