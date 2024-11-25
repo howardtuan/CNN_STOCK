@@ -6,14 +6,14 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from models.cnn_model import CNN5d
-from utils.data_utils import CustomImageDataset
+from utilsS.data_utils import CustomImageDataset
 from sklearn.metrics import accuracy_score
-from utils.config import Config
-from utils.train_epoch import _train_epoch
-from utils.validate_epoch import _validate_epoch
-from utils.early_stopping import _early_stopping_check
-from utils.training_log import _print_training_log
-from utils.model_save import save_model
+from utilsS.config import Config
+from utilsS.train_epoch import _train_epoch
+from utilsS.validate_epoch import _validate_epoch
+from utilsS.early_stopping import _early_stopping_check
+from utilsS.training_log import _print_training_log
+from utilsS.model_save import save_model
 import os
 
 # Modify the train_model function to use the new save_model function

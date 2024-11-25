@@ -6,13 +6,13 @@ from PIL import Image
 import pandas as pd
 from torch.utils.data import Dataset
 from torchvision import transforms
-from utils.config import Config
+from utilsS.config import Config
 
 # DATA PREPARE
 class CustomImageDataset(Dataset):
     def __init__(self, img_dir, labels_file, transform=None):
         self.img_dir = img_dir
-        self.labels = pd.read_excel(labels_file)
+        self.labels = pd.read_csv(labels_file,sep="\t")
         self.transform = transform or transforms.Compose([
             transforms.Resize((Config.IMG_HEIGHT[5], Config.IMG_WIDTH[5])),
             transforms.ToTensor(),

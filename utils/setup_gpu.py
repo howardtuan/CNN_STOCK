@@ -2,7 +2,7 @@ import os
 import re
 import warnings
 import torch
-from utils.config import Config
+from utilsS.config import Config
 
 def setup_gpu():
     warnings.filterwarnings('ignore')

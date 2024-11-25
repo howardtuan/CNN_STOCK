@@ -1,4 +1,4 @@
-from utils.config import Config
+from utilsS.config import Config
 
 def _early_stopping_check(
     current_loss, 

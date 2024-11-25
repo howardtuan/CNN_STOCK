@@ -1,4 +1,4 @@
-from utils.config import Config
+from utilsS.config import Config
 def _train_epoch(model, train_loader, criterion, optimizer, device, epoch):
     model.train()
     running_loss = 0.0

@@ -1,12 +1,22 @@
 # 主程序模組
 # 負責整合所有模組，完成數據加載、模型訓練與評估
+import sys
+sys.dont_write_bytecode = True
+
+import os
+
+# 將專案根目錄添加到系統路徑
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print(sys.path)
 import torch
 import torch.nn as nn
-from utils.setup_gpu import setup_gpu
-from utils.config import Config
+from utilsS.model_loader import load_model
+from utilsS.config import Config
+from utilsS.setup_gpu import setup_gpu
+
 from models.cnn_model import CNN5d
-from utils.model_loader import load_model
-from utils.data_utils import CustomImageDataset
+
+from utilsS.data_utils import CustomImageDataset
 from scripts.train import train_model
 from scripts.evaluate import evaluate_model
 from torch.utils.data import DataLoader, random_split
@@ -18,8 +28,8 @@ def main():
         torch.cuda.empty_cache()
 
         # DATA dir
-        img_dir = 'C:\\Users\\user\\Desktop\\Leet\\finance\\data\\pred_5_to_5\\5_5'
-        labels_file = 'C:\\Users\\user\\Desktop\\Leet\\finance\\data\\pred_5_to_5\\5_5.xlsx'
+        img_dir = 'C:\\Users\\user\\Desktop\\Leet\\finance\\data\\pred_5_to_5\\5_5_clear\\Image1'
+        labels_file = 'C:\\Users\\user\\Desktop\\Leet\\finance\\data\\pred_5_to_5\\5_5_clear\\X_5_5_clear.txt'
 
         print("Data loading...")
         dataset = CustomImageDataset(img_dir=img_dir, labels_file=labels_file)
